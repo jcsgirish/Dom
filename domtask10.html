@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>booking app</title>
+    
+
+
+  </head>
+  <body>
+    <header>
+      <h1>SIGNUP PAGE</h1>
+    </header>
+
+    <section class="container">
+      <form onsubmit="lstorage(event)">
+
+        <h1>Add User</h1>
+
+          <label>Name:</label>
+          <input type="text" id="name">
+
+          <label>Email:</label>
+          <input type="text" id="email">
+    
+            <label>phonenumber:</label>
+            <input type="tel" id="phonenumber">
+        
+        <input class="btn" type="submit" value ="submit">
+      </form>
+
+      <ul id="listofUsers"></ul>
+
+      <script>
+        
+        function lstorage(event){
+            event.preventDefault()
+            var myname=(event.target.name.value)
+            var myemail=(event.target.email.value)
+            var mynumber=(event.target.phonenumber.value)
+
+            const object={
+                myname,
+                myemail,
+                mynumber,
+            }
+            localStorage.setItem(object.myemail,JSON.stringify(object))
+            UseronScreen(object)
+            
+        }
+        function UseronScreen(object)
+        {
+
+          const parentelement  = document.getElementById('listofUsers')
+          const children = document.createElement('li')
+          children.textContent= object.myname + ' - '+ object.myemail + ' - ' + object.mynumber
+          parentelement.appendChild(children)
+
+        }
+
+
+
+    
+      </script>
+
+    </section>
+
+
+  </body>
+</html>
