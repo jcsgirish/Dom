@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>booking app</title>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+  <body>
+    
+    <style>
+      body{
+          background-color: rgb(175, 150, 112);
+      }
+         
+  </style>
+
+  <style>
+      form{text-align:center;}
+    
+  </style>
+  
+    <header>
+      <h1 style="text-align: center;color: rgba(1, 7, 10, 0.932);"> BOOK A CALL </h1>
+    </header>
+
+    <section class="container">
+      <form onsubmit="lstorage(event)">
+
+          <label><b>NAME</b></label><br>
+          <input type="text" id="name" required><br>
+
+          <label><b>EMAIL</b></label><br>
+          <input type="text" id="email" required><br>
+
+          <label><b>PHONENUMBER</b></label><br>
+          <input type="tel" id="phonenumber" required><br>
+
+        <button style="background-color: black;color: white;">Submit</button><br>
+      </form>
+
+      <ul id="listofUsers"></ul>
+
+      <script>
+
+        function lstorage(event){
+            event.preventDefault()
+            var myname=(event.target.name.value)
+            var myemail=(event.target.email.value)
+            var mynumber=(event.target.phonenumber.value)
+
+            const object={
+                myname,
+                myemail,
+                mynumber,
+            }
+            localStorage.setItem(object.myemail,JSON.stringify(object))
+            UseronScreen(object)
+        
+
+        }
+        function UseronScreen(object)
+        {
+
+          const parentelement  = document.getElementById('listofUsers')
+          const children = document.createElement('li')
+          children.textContent= object.myname + ' - '+ object.myemail + ' - ' + object.mynumber
+        
+
+          const deletebutton =document.createElement('input')
+          deletebutton.type="button"
+          deletebutton.value='Delete'
+          deletebutton.onclick =()=>{
+            localStorage.removeItem(object.myemail)
+            parentelement.removeChild(children)
+
+          }
+         
+          children.appendChild(deletebutton)
+          parentelement.appendChild(children)
+
+        }
+
+      </script>
+
+    </section>
+
+
+  </body>
+</html>
