@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>booking app</title>
+   
+
+  </head>
+  <body>
+    
+    <style>
+      body{
+        background-image:url(https://cdn.pixabay.com/photo/2015/09/24/12/52/silver-955496_960_720.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        
+   
+
+
+    }
+         
+  </style>
+
+  <style>
+      form{text-align:center;}
+      ul{text-align:center}
+    
+  </style>
+  
+    <header>
+      <h1 style="color: rgba(1, 7, 10, 0.932);text-align:center";> BOOK A CALL </h1>
+    </header>
+
+    <section class="container">
+
+      <form onsubmit="lstorage(event)">
+
+          <label><b>NAME</b></label><br>
+          <input type="text" id="name"  required><br>
+
+          <label><b>EMAIL</b></label><br>
+          <input type="text" id="email" required><br>
+
+          <label><b>PHONENUMBER</b></label><br>
+          <input type="tel" id="phonenumber" required><br><br>
+
+        <button style="color:white;background-color: rgb(0, 0, 0);width:10%;">Submit</button><br>
+
+      </form>
+
+      <h2 style="color:rgba(1, 7, 10, 0.932);text-align: center;"><b>MYINFO</b></h2>
+
+
+      <ul id="listofUsers"></ul>
+
+      <script>
+
+        function lstorage(event){
+            event.preventDefault()
+            var myname=(event.target.name.value)
+            var myemail=(event.target.email.value)
+            var mynumber=(event.target.phonenumber.value)
+
+            const object={
+                myname,
+                myemail,
+                mynumber,
+            }
+            localStorage.setItem(object.myemail,JSON.stringify(object))
+            UseronScreen(object)
+        
+
+        }
+        function UseronScreen(object)
+        {
+
+          const parentelement  = document.getElementById('listofUsers')
+          const children = document.createElement('li')
+          children.textContent= object.myname + ' - '+ object.myemail + ' - ' + object.mynumber
+        
+
+          const deletebutton =document.createElement('input')
+          deletebutton.type="button"
+          deletebutton.value='Delete'
+
+          deletebutton.onclick =()=>{
+            localStorage.removeItem(object.myemail)
+            parentelement.removeChild(children)
+
+          }
+         
+
+          const editbutton =document.createElement('input')
+          editbutton.type="button"
+          editbutton.value='Edit'
+
+          editbutton.onclick =()=>{
+            localStorage.removeItem(object.myemail)
+            parentelement.removeChild(children)
+            document.getElementById('name').value=object.myname
+            document.getElementById('email').value=object.myemail
+            document.getElementById('phonenumber').value=object.mynumber
+            
+
+          }
+          
+          
+         
+          children.appendChild(deletebutton)
+          children.appendChild(editbutton)
+          parentelement.appendChild(children)
+
+        }
+        
+
+      </script>
+
+    </section>
+
+
+  </body>
+</html>
